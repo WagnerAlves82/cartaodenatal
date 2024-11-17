@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartão de Natal</title>
+  <meta property="og:title" content="🎄 Feliz Natal de [nome]! 🎄">
+<meta property="og:description" content="Compartilhe amor e alegria neste Natal especial!">
+<meta property="og:image" content="assets\amigo_natalino.png">
+<meta property="og:url" content="https://seusite.com/meu-cartao">
+<meta property="og:type" content="website">
+
+  <style>
+    body {
+      font-family: 'Nunito', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                  url("https://cdn.pixabay.com/animation/2022/12/13/13/47/13-47-25-761_512.gif") no-repeat center center fixed;
+      background-size: cover;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .card, .gif-card, .form, .share-buttons {
+      padding: 30px;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      display: none;
+    }
+
+    .card {
+      display: block; /* Mostra somente o card inicial */
+    }
+
+    h1, h2 {
+      color: #d42426;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+    }
+
+    .card h1 {
+      font-size: 2.2em;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px 0;
+      border: none;
+      background-color: #d42426;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    button:hover {
+      background-color: #b51d1f;
+      transform: translateY(-2px);
+    }
+
+    .gif-card img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .gif-card h2 {
+      font-family: 'Great Vibes', cursive; /* Fonte natalina */
+      color: #d42426;
+      text-align: left;
+      margin-top: 20px;
+      font-size: 2.5em;
+    }
+
+    @media (max-width: 480px) {
+      .card h1 {
+        font-size: 1.8em;
+      }
+
+      .gif-card h2 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+  
+  <div class="container">
+    <!-- Primeiro Card -->
+    <div class="card" id="initialCard">
+      <h1>🎄 Feliz Natal! 🎄</h1>
+      <p>Compartilhe amor e alegria neste Natal especial!</p>
+      
+      <button onclick="showForm()">Criar Meu Cartão</button>
+    </div>
+
+    <!-- Formulário -->
+    <div class="form" id="shareForm">
+      <h2>Personalize Seu Cartão</h2>
+      <input type="text" id="name" placeholder="Seu Nome" required>
+      <input type="email" id="email" placeholder="Seu Email" required>
+      <button onclick="submitForm()">Criar Cartão</button>
+    </div>
+
+    <!-- Exibição da GIF com texto -->
+    <div class="gif-card" id="gifCard">
+      <img src="https://img1.picmix.com/output/stamp/normal/7/1/9/5/2415917_e78ad.gif" alt="Feliz Natal">
+      <h2 id="personalizedMessage">Feliz Natal, [Nome]</h2>
+    </div>
+
+    <!-- Botões de Compartilhamento -->
+    <div class="share-buttons" id="shareButtons">
+      <button onclick="shareWhatsApp()">Compartilhar no WhatsApp</button>
+      <button onclick="shareTelegram()">Compartilhar no Telegram</button>
+      <button onclick="shareInstagram()">Visitar meu Instagram</button>
+    </div>
+  </div>
+
+  <script>
+    function showForm() {
+      document.getElementById("initialCard").style.display = "none";
+      document.getElementById("shareForm").style.display = "block";
+    }
+
+    window.onload = function() {
+  var audio = document.getElementById('audioPlayer');
+  audio.controls = false; // Oculta os controles
+  audio.play(); // Inicia a reprodução
+};
+
+    function submitForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!name || !email) {
+        alert("Por favor, preencha todos os campos corretamente!");
+        return;
+      }
+
+      // Atualiza mensagem com o nome
+      document.getElementById("personalizedMessage").textContent = `Feliz Natal, ${name}!`;
+
+      // Exibe o cartão final
+      document.getElementById("shareForm").style.display = "none";
+      document.getElementById("gifCard").style.display = "block";
+      document.getElementById("shareButtons").style.display = "flex";
+    }
+
+    function shareWhatsApp() {
+      const name = document.getElementById("name").value.trim();
+      const message = encodeURIComponent(
+        `🎄 Feliz Natal! 🎄\n\nMensagem compartilhada por ${name}. Que seu Natal seja repleto de amor e alegria!`
+      );
+      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
+    }
+
+    function shareTelegram() {
+      const name = document.getElementById("name").value.trim();
+      const message = encodeURIComponent(
+        `🎄 Feliz Natal! 🎄\n\nMensagem compartilhada por ${name}. Que seu Natal seja repleto de amor e alegria!`
+      );
+      window.open(`https://t.me/share/url?url=${message}`, '_blank');
+    }
+
+    function shareInstagram() {
+      window.open("https://www.instagram.com/wagnercastellanijr/", '_blank');
+    }
+  </script>
+</body>
+</html>
